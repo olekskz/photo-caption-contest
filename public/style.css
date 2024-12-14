@@ -1,0 +1,110 @@
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('./fonts/ClashGrotesk_Complete/Fonts/WEB/fonts/ClashGrotesk-Light.woff2') format('woff2'),
+         url('./fonts/ClashGrotesk_Complete/Fonts/WEB/fonts/ClashGrotesk-Light.woff') format('woff'),
+         url('./fonts/ClashGrotesk_Complete/Fonts/TTF/ClashGrotesk-Variable.ttf') format('truetype'),
+         url('./fonts/ClashGrotesk_Complete/Fonts/OTF/ClashGrotesk-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+body {
+    font-family: 'MyCustomFont', sans-serif;
+    font-size: x-large;
+    display: flex;
+    justify-content: center; /* Центрує по горизонталі */
+    align-items: center;     /* Центрує по вертикалі */
+    height: 100vh;           /* Висота контейнера (повний екран) */
+    margin: 0;  
+    background-color: #006D77; 
+}
+
+
+.login-form {
+    width: 300px;   /* Ширина форми */
+    padding: 20px;   /* Відступи всередині форми */
+    border: 1px solid #ccc;  /* Межа форми */
+    border-radius: 5px;
+    background-color: #83C5BE;
+}
+
+.login-label {
+    font-size: 20px;
+    margin-bottom: 10px;
+    position: relative;
+    left: 40%;
+    top: 41.5%;
+    transform: translate(-50%, -50%)
+}
+
+.input-fields {
+    display: grid;
+    row-gap: 0.01px;  
+    padding: 10px;
+    font-size: 16px;  
+    color: #333;
+    outline: none;
+    transition: background-color 1s ease;
+}
+
+.input-fields input:focus {
+    background-color: #bdbdbd; /* Темніший сірий фон */
+    border-color: #888; /* Темніший колір рамки */
+}
+
+.input-fields input::placeholder {
+    color: #777; /* Сірий колір placeholder */
+    font-style: italic; /* Курсив */
+}
+
+.input-fields input {
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    height: 20px;
+}
+
+.continue-with-container {
+    display: flex;
+    width: 50%;
+    margin: 10 auto;
+    gap: 20px; /* Проміжок між кнопками */
+}
+
+.continue-with-container button {
+    flex: 1;
+    height: 35px;
+    font-size: 16px;
+    background: white;
+    border: none;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .continue-with-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .continue-with-container button {
+        width: 100%;
+    }
+}
+
+.continue-with-container button:hover {
+    background-color: #EDF6F9;
+}
+
+.login-button {
+    position: relative;
+    left: 41.5%;
+    background-color: #E29578;
+    border: none;
+    height: 30px;
+    width: 50px;
+    margin-top: 10px;
+}
+
+.login-button:hover {
+    background-color: #FFDDD2;
+}
