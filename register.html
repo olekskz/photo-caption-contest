@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="public/style.css">
-    <title>Login</title>
+    <title>Register</title>
 </head>
 <body>
     <form class="login-form">
-        <label class="login-label">Login</label>
+        <label class="login-label">Register</label>
         <br>
         <div class="input-fields">
             <input type="text" class="username-input" placeholder="Username">
             <br>
+            <input type="email" class="email-input" placeholder="Email">
+            <br>
             <input type="password" class="password-input" placeholder="Password">
+            <br>
+            <input type="password" class="confirm-password-input" placeholder="Confirm Password">
         </div>
         <hr>
         <label class="continue-with">Continue with:</label>
@@ -28,10 +32,7 @@
                 <img src="./public/imgs/github-brands-solid.svg" alt="icon">
             </button>
         </div>
-        <button class="login-button" type="submit">Login</button>
-        <p class="register-link">
-            Don't have an account? <a href="/register">Register</a>
-        </p>
+        <button class="register-button" type="submit">Register</button>
     </form>
 </body>
 </html>

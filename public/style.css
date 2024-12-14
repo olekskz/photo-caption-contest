@@ -19,7 +19,6 @@ body {
     background-color: #006D77; 
 }
 
-
 .login-form {
     width: 300px;   /* Ширина форми */
     padding: 20px;   /* Відступи всередині форми */
@@ -34,17 +33,17 @@ body {
     position: relative;
     left: 40%;
     top: 41.5%;
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%);
 }
 
 .input-fields {
     display: grid;
-    row-gap: 0.01px;  
+    row-gap: 10px;  
     padding: 10px;
     font-size: 16px;  
     color: #333;
     outline: none;
-    transition: background-color 1s ease;
+    transition: background-color 0.3s ease;
 }
 
 .input-fields input:focus {
@@ -80,17 +79,6 @@ body {
     box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
-    .continue-with-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .continue-with-container button {
-        width: 100%;
-    }
-}
-
 .continue-with-container button:hover {
     background-color: #EDF6F9;
 }
@@ -103,8 +91,35 @@ body {
     height: 30px;
     width: 50px;
     margin-top: 10px;
+    border-radius: 5px;
 }
 
 .login-button:hover {
     background-color: #FFDDD2;
+}
+
+.register-button {
+    position: relative;
+    left: 40%;
+    background-color: #E29578;
+    border: none;
+    height: 30px;
+    width: 70px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.register-button:hover {
+    background-color: #FFDDD2;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: #ccc;
+    margin: 20px 0;
+}
+
+.register-link {
+    font-size: 18px;
 }
