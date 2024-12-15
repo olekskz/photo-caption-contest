@@ -1,0 +1,204 @@
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('./fonts/ClashGrotesk_Complete/Fonts/WEB/fonts/ClashGrotesk-Light.woff2') format('woff2'),
+         url('./fonts/ClashGrotesk_Complete/Fonts/WEB/fonts/ClashGrotesk-Light.woff') format('woff'),
+         url('./fonts/ClashGrotesk_Complete/Fonts/TTF/ClashGrotesk-Variable.ttf') format('truetype'),
+         url('./fonts/ClashGrotesk_Complete/Fonts/OTF/ClashGrotesk-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'MyCustomFont', sans-serif;
+    font-size: x-large;
+    margin: 0;
+    background-color: #FFDDD2;
+    display: flex;
+    justify-content: center;  /* Центруємо контент по горизонталі */
+    align-items: flex-start;
+    min-height: 100vh;
+    overflow-x: hidden; /* Щоб не було горизонтальної прокрутки */
+    padding-top: 80px; /* Відступ для меню */
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #E29578;
+    color: #EDF6F9;
+    z-index: 1000;
+    padding: 10px 20px;
+    display: flex; /* Використовуємо Flexbox */
+    justify-content: space-between; /* Ліве меню на лівому краю, праве — на правому */
+    align-items: center; /* Вирівнюємо елементи по вертикалі */
+    height: 50px; /* Фіксована висота меню */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.menu-items {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    justify-content: space-between; /* Дистрибуція елементів по краях */
+}
+
+.menu-left, .menu-right {
+    display: flex;
+    align-items: center; /* Вирівнюємо елементи по вертикалі */
+}
+
+.menu-left {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.menu-right {
+    display: flex; /* Вирівнювання елементів у ряд */
+    gap: 15px; /* Відстань між елементами */
+    margin-left: auto; /* Переміщує меню праворуч */
+}
+
+
+.menu-items li {
+    display: inline-block;
+}
+
+.menu-right a img {
+    vertical-align: middle; /* Вирівнює іконки по центру тексту */
+}
+.menu-items a {
+    color: #000;
+    text-decoration: none;
+    font-size: 25px;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+}
+
+
+.menu-items a:hover {
+    background-color: #FFDDD2;
+    border-radius: 5px;
+}
+
+.content-container {
+    width: 60%; /* Збільшена ширина контейнера */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    max-height: calc(100vh - 120px); /* Висота контейнера з урахуванням висоти меню */
+    overflow-y: auto; /* Додаємо вертикальний повзунок */
+    margin: 0 auto; /* Центруємо контейнер по горизонталі */
+    padding-top: 20px; /* Відступ зверху, щоб не перекривалось з меню */
+}
+
+.upper-part {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    gap: 10px;
+}
+
+.photo-name {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.upper-part img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.user-data {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.user-data p {
+    font-weight: bold;
+    color: #006D77;
+}
+
+.lower-part {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.caption-box {
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    color: #333;
+    font-size: 16px;
+}
+
+.upper-part input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.upper-part input:focus {
+    border-color: #006D77;
+}
+
+.profile {
+    width: 500px;
+    display: flex;
+    flex-direction: column; /* Всі рядки розташовуються вертикально */
+    gap: 10px; /* Відстань між рядками */
+    font-size: 16px;
+    color: #333;
+}
+
+.profile img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.profile label {
+    font-weight: bold;
+    color: #006D77; /* Мінімальна ширина для вирівнювання підписів */
+    text-align: right; /* Текст у label вирівнюється праворуч */
+}
+
+.profile p {
+    margin: 0;
+}
+
+.row {
+    display: flex;
+    justify-content: flex-start; /* Розташування елементів у рядку зліва */
+    gap: 10px; /* Відстань між <label> і <p> */
+    align-items: center; /* Вирівнювання по вертикалі (якщо елементи різної висоти) */
+}
+
+.add-caption-button {
+    width: 100px;
+    background-color: #FFDDD2;
+    border: none;
+    border-radius: 15px;
+    height: 30px;
+}
+
+.add-caption-button:hover {
+    background-color: #fd9d7d;
+}
+
