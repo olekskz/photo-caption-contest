@@ -42,8 +42,9 @@ body {
     display: flex;
     margin: 0;
     padding: 0;
-    width: 100%;
-    justify-content: space-between; /* Дистрибуція елементів по краях */
+    width: auto;
+    justify-content: flex-start;
+    gap: 0; /* Дистрибуція елементів по краях */
 }
 
 .menu-left, .menu-right {
@@ -63,9 +64,7 @@ body {
 }
 
 
-.menu-items li {
-    display: inline-block;
-}
+
 
 .menu-right a img {
     vertical-align: middle; /* Вирівнює іконки по центру тексту */

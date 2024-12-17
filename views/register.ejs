@@ -3,34 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/style.css">
-    <title>Login</title>
+    <link rel="stylesheet" href="/style.css">
+    <title>Register</title>
 </head>
 <body>
     <form class="login-form">
-        <label class="login-label">Login</label>
+        <label class="login-label">Register</label>
         <br>
         <div class="input-fields">
             <input type="text" class="username-input" placeholder="Username">
             <br>
+            <input type="email" class="email-input" placeholder="Email">
+            <br>
             <input type="password" class="password-input" placeholder="Password">
+            <br>
+            <input type="password" class="confirm-password-input" placeholder="Confirm Password">
         </div>
         <hr>
         <label class="continue-with">Continue with:</label>
         <div class="continue-with-container">
             <button class="google-button">
-                <img src="./public/imgs/google-brands-solid.svg" alt="icon">
+                <img src="/imgs/google-brands-solid.svg" alt="icon">
             </button>
             <button class="facebook-button">
-                <img src="./public/imgs/facebook-brands-solid.svg" alt="icon">
+                <img src="/imgs/facebook-brands-solid.svg" alt="icon">
             </button>
             <button class="github-button">
-                <img src="./public/imgs/github-brands-solid.svg" alt="icon">
+                <img src="/imgs/github-brands-solid.svg" alt="icon">
             </button>
         </div>
-        <button class="login-button" type="submit">Login</button>
-        <p class="register-link">
-            Don't have an account? <a href="/register">Register</a>
+        <button class="register-button" type="submit">Register</button>
+        <p class="login-link">
+            Don't have account? <a href="/login">Create one!</a>
         </p>
     </form>
 </body>
