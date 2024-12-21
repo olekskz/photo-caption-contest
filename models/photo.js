@@ -7,9 +7,13 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             // Вказуємо зв'язок між Фото та User через зовнішній ключ
             Photo.belongsTo(models.User, {
-                foreignKey: 'user_id', // Вказуємо зовнішній ключ
-                as: 'user', // Можна використовувати псевдонім для асоціації
-            });
+              foreignKey: {
+                  name: 'user_id', // Вказуємо явно 'user_id'
+                  field: 'user_id', // Це вказує ім'я стовпця в базі даних
+                  allowNull: false,
+              },
+              as: 'user',
+          });                  
         }
     }
 

@@ -7,17 +7,17 @@
     <title>Register</title>
 </head>
 <body>
-    <form class="login-form">
+    <form class="register-form">
         <label class="login-label">Register</label>
         <br>
         <div class="input-fields">
-            <input type="text" class="username-input" placeholder="Username">
+            <input type="text" class="username-input" placeholder="Username" required>
             <br>
-            <input type="email" class="email-input" placeholder="Email">
+            <input type="email" class="email-input" placeholder="Email" required>
             <br>
-            <input type="password" class="password-input" placeholder="Password">
+            <input type="password" class="password-input" placeholder="Password" required>
             <br>
-            <input type="password" class="confirm-password-input" placeholder="Confirm Password">
+            <input type="password" class="confirm-password-input" placeholder="Confirm Password" required>
         </div>
         <hr>
         <label class="continue-with">Continue with:</label>
@@ -34,8 +34,10 @@
         </div>
         <button class="register-button" type="submit">Register</button>
         <p class="login-link">
-            Don't have account? <a href="/login">Create one!</a>
+            Already have a account? <a href="/login">Login!</a>
         </p>
+        <div id="message"></div>
     </form>
 </body>
+<script src="/register.js"></script>
 </html>
