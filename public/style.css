@@ -127,3 +127,17 @@ hr {
 .login-link {
     font-size: 18px;
 }
+
+.register-form {
+    width: 300px;   /* Ширина форми */
+    padding: 20px;   /* Відступи всередині форми */
+    border: 1px solid #ccc;  /* Межа форми */
+    border-radius: 5px;
+    background-color: #83C5BE;
+}
+
+#message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}

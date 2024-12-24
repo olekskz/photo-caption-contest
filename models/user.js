@@ -5,7 +5,11 @@ const {Model, Sequelize, DataTypes} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
         static associate(models) {
-            User.hasMany(models.Photo);
+            User.hasMany(models.Photo, {
+                foreignKey: 'user_id', // Вказуємо явно 'user_id'
+                as: 'photos',  // Це псевдонім для асоціації, що можна використовувати для доступу до фотографій
+            });
+            
             User.hasMany(models.Caption, {
                 foreignKey: 'user_id',
                 as: 'captions'
@@ -19,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            name: {
+            username: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
