@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Post</title>
+    <link rel="stylesheet" href="/mainPage.css">
+</head>
+<body>
+    <header class="menu">
+        <nav>
+            <ul class="menu-items">
+                <li class="menu-left">
+                    <a href="/auth/main">Photo Contest</a>
+                </li>
+                <div class="menu-right">
+                    <a class="home-button">
+                        <img src="/imgs/user-regular.svg" alt="icon" width="20" height="20">
+                    </a>
+                    <a href="auth/addPost" class="add-post-button">
+                        <img src="/imgs/square-plus-regular.svg" alt="icon" width="20" height="25">
+                    </a>
+                    <a class="logout-button">
+                        <img src="/imgs/right-from-bracket-solid.svg" alt="icon" width="20" height="25">
+                    </a>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content-container">
+        <div class="upper-part">
+            <h1>Add a New Post</h1>
+            <form class="add-post-form">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image:</label>
+                    <input type="file" id="image" name="image" accept="image/*" required>
+                </div>
+                </div>
+                <button type="submit" class="add-caption-button">Add Post</button>
+            </form>
+        </div>
+    </main>
+</body>
+<script src="/js/addPost.js"></script>
+<script src="/js/mainPage.js"></script>
+</html>

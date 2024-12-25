@@ -21,7 +21,7 @@ registerForm.addEventListener('submit', async (event) => {
     };
 
     try {
-        const response = await fetch('http://localhost:3000/auth/register', {
+        const response = await fetch('http://localhost:3001/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
