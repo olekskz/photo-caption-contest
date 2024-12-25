@@ -80,14 +80,16 @@ router.post('/login', (req, res, next) => {
 router.post('/logout', (req, res) => {
   req.logout((err) => {
     if (err) {
+      console.error('Error during logout:', err); // Додано логування для перевірки помилок
       return res.status(500).json({ message: 'Помилка при виході' });
     }
     req.session.destroy((err) => {
       if (err) {
+        console.error('Error destroying session:', err); // Додано логування для перевірки помилок
         return res.status(500).json({ message: 'Помилка при знищенні сесії' });
       }
       res.clearCookie('connect.sid'); // Clear the session cookie
-      res.json({ redirectUrl: '/login'});
+      res.json({ redirectUrl: '/login' });
     });
   });
 });
@@ -118,30 +120,5 @@ router.get('/profile', (req, res) => {
 router.get('/register', (req ,res) => {
   res.render('register')
 })
-
-
-router.post('/addPost', upload.single('image'), async (req, res) => {
-  if (!req.isAuthenticated()) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
-
-  const { title } = req.body;
-  const imagePath = req.file.path;
-
-  try {
-    const newPhoto = await Photo.create({
-      title,
-      url: imagePath,
-      user_id: req.user.id // Assuming you have user authentication
-    });
-
-
-    res.redirect('/auth/main');
-  } catch (err) {
-    console.error('Error creating photo:', err); // Додайте це для перевірки помилок
-    res.status(500).json({ message: 'Помилка при створенні посту', error: err.message });
-  }
-});
-
 
 module.exports = router;

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Contest</title>
+    <title>Main Page</title>
     <link rel="stylesheet" href="/mainPage.css">
 </head>
 <body>
@@ -17,10 +17,10 @@
                     <a href="/auth/profile" class="profile-button">
                         <img src="/imgs/user-regular.svg" alt="icon" width="20" height="20">
                     </a>
-                    <a  href="/auth/addPost" class="add-post-button">
+                    <a href="/auth/addPost" class="add-post-button">
                         <img src="/imgs/square-plus-regular.svg" alt="icon" width="20" height="25">
                     </a>
-                    <a class="logout-button">
+                    <a href="/logout" class="logout-button">
                         <img src="/imgs/right-from-bracket-solid.svg" alt="icon" width="20" height="25">
                     </a>
                 </div>
@@ -28,37 +28,10 @@
         </nav>
     </header>
     
-    <main class="content-container">
-        <!-- Перший елемент -->
-        <div class="upper-part">
-            <label class="photo-name">Game</label>
-            <img src="/imgs/Tips_for_Taking_Photos_at_the_Beach_55dd7d25-11df-4acf-844f-a5b4ebeff4df.webp" alt="photo" width="100%">
-            <div class="user-data">
-                <label>By: <p>User</p></label>
-                <hr>
-                <div class="lower-part">
-                    <div class="caption-box">No captions yet</div>
-                    <input type="text" placeholder="Add caption">
-                    <button class="add-caption-button">Add</button>
-                </div>
-            </div>
+        <div class="posts-container">
+            <!-- Posts will be loaded here -->
         </div>
-
-        <!-- Другий елемент -->
-        <div class="upper-part">
-            <label class="photo-name">Game</label>
-            <img src="/imgs/Tips_for_Taking_Photos_at_the_Beach_55dd7d25-11df-4acf-844f-a5b4ebeff4df.webp" alt="photo" width="100%">
-            <div class="user-data">
-                <label>By: <p>User</p></label>
-                <hr>
-                <div class="lower-part">
-                    <div class="caption-box">No captions yet</div>
-                    <input type="text" placeholder="Add caption">
-                    <button class="add-caption-button">Add</button>
-                </div>
-            </div>
-        </div>
-    </main>
+    
 
     <!-- Підключення скрипта mainPage.js -->
     <script src="/js/mainPage.js"></script>

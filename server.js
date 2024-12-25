@@ -8,6 +8,7 @@ const { User } = require('./models');
 require('dotenv').config();
 const photoRoutes = require('./routers/photo-route');
 const userRoutes = require('./routers/user-router');
+const captionRoutes = require('./routers/caption-route');
 const bcrypt = require('bcrypt');
 const PORT = 3001;
 
@@ -24,8 +25,14 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(helmet());
-
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "https://res.cloudinary.com"],
+    },
+  })
+);
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -81,8 +88,9 @@ passport.deserializeUser(async (id, done) => {
 });
 
 // Роути
-app.use(photoRoutes);
 app.use('/auth', userRoutes);
+app.use('/auth', photoRoutes);
+app.use('/auth', captionRoutes);
 
 app.get('/', (req, res) => {
   res.render('register');
