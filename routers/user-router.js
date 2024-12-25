@@ -112,7 +112,7 @@ router.get('/profile', (req, res) => {
       return res.redirect('/login');
     }
   
-    res.render('profile', { user: req.user });
+    res.render('account', { user: req.user });
 });
 
 router.get('/register', (req ,res) => {

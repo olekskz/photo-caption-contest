@@ -155,6 +155,7 @@ body {
 }
 
 .profile {
+    padding-top: 100px;
     width: 500px;
     display: flex;
     flex-direction: column; /* Всі рядки розташовуються вертикально */
