@@ -76,7 +76,6 @@ router.post('/login', (req, res, next) => {
 });
 
 
-
 router.post('/logout', (req, res) => {
   req.logout((err) => {
     if (err) {
@@ -94,12 +93,14 @@ router.post('/logout', (req, res) => {
   });
 });
 
+
 router.get('/addPost', (req, res) => {
   if (!req.isAuthenticated()) {
     return res.redirect('/login');
   }
   res.render('addPost');
 });
+
 
 router.get('/main', (req, res) => {
   if (!req.isAuthenticated()) {

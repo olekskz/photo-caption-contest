@@ -29,19 +29,37 @@ module.exports = (sequelize, DataTypes) => {
             },
             email: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                allowNull: true,
                 unique: true,
+                validate: {
+                    isEmail: true,
+                  },
             },
             password: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
             },
+            githubId: {
+                type: DataTypes.STRING,
+                unique: true,
+              },
         },
         {
             sequelize,
             modelName: 'User',
             tableName: 'users',
             timestamps: true,
+            hooks: {
+                beforeValidate: (user, options) => {
+                  if (user.githubId) {
+                    user.password = user.password || null;
+                  } else {
+                    if (!user.password) {
+                      throw new Error('Password is required');
+                    }
+                  }
+                },
+              },
         }
     );
     return User;

@@ -1,20 +1,19 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const helmet = require('helmet');
 const passport = require('passport');
-const localStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
+const GitHubStrategy = require('passport-github2').Strategy;
 const session = require('express-session');
 const { User } = require('./models');
-require('dotenv').config();
 const photoRoutes = require('./routers/photo-route');
 const userRoutes = require('./routers/user-router');
 const captionRoutes = require('./routers/caption-route');
 const bcrypt = require('bcrypt');
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
-
-
 
 // Middleware
 app.use(express.json());
@@ -30,6 +29,7 @@ app.use(
     directives: {
       defaultSrc: ["'self'"],
       imgSrc: ["'self'", "data:", "https://res.cloudinary.com"],
+      scriptSrc: ["'self'"],
     },
   })
 );
@@ -50,7 +50,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(
-  new localStrategy(
+  new LocalStrategy(
     {
       usernameField: 'username',
       passwordField: 'password',
@@ -74,6 +74,34 @@ passport.use(
   )
 );
 
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: 'http://localhost:3001/auth/github/callback',
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        console.log('GitHub profile:', profile); // Додано лог для профілю GitHub
+
+        const [user] = await User.findOrCreate({
+          where: { githubId: profile.id },
+          defaults: {
+            username: profile.username,
+            githubId: profile.id,
+          },
+        });
+
+        done(null, user);
+      } catch (error) {
+        console.error('Error during GitHub authentication:', error); // Додано лог для помилок
+        done(error);
+      }
+    }
+  )
+);
+
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -87,7 +115,14 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-// Роути
+// Роути для аутентифікації
+app.get('/auth/github', passport.authenticate('github'));
+app.get(
+  '/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login', successRedirect: '/auth/main' }),
+);
+
+// Використання маршрутизаторів
 app.use('/auth', userRoutes);
 app.use('/auth', photoRoutes);
 app.use('/auth', captionRoutes);
@@ -105,5 +140,5 @@ app.get('/register', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log('sesrver is listening on PORT 3001')
-})
+  console.log(`Server is running on port ${PORT}`);
+});

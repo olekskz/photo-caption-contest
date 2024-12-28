@@ -13,7 +13,7 @@ loginForm.addEventListener('submit', async (event) => {
     };
 
     try {
-        const response = await fetch('http://localhost:3001/auth/login', { // Updated the route to match the router
+        const response = await fetch('/auth/login', { // Updated the route to match the router
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -32,4 +32,8 @@ loginForm.addEventListener('submit', async (event) => {
         console.error(err);
         messageBox.textContent = 'Network or server issue';
     }
+});
+
+document.getElementById('github-button').addEventListener('click', () => {
+    window.location.href = '/auth/github';
 });
