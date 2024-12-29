@@ -6,12 +6,15 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const session = require('express-session');
 const { User } = require('./models');
 const photoRoutes = require('./routers/photo-route');
 const userRoutes = require('./routers/user-router');
 const captionRoutes = require('./routers/caption-route');
 const bcrypt = require('bcrypt');
+const { where } = require('sequelize');
+const { defaults } = require('pg');
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -84,7 +87,6 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        console.log('GitHub profile:', profile); // Додано лог для профілю GitHub
 
         const [user] = await User.findOrCreate({
           where: { githubId: profile.id },
@@ -112,7 +114,6 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        console.log('Google profile:', profile); // Додано лог для профілю Google
 
         const email = profile.emails && profile.emails.length > 0 ? profile.emails[0].value : null;
 
@@ -133,6 +134,32 @@ passport.use(
     }
   )
 );
+
+passport.use(
+  new FacebookStrategy({
+    clientID: process.env.FACEBOOK_CLIENT_ID,
+    clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL: 'http://localhost:3001/auth/facebook/callback',
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    try {
+
+      const email = profile.emails && profile.emails.length > 0 ? profile.emails[0].value : null;
+
+      const [user] = await User.findOrCreate({
+        where : { facebookId: profile.id },
+        defaults  : {
+          username: profile.displayName,
+          facebookId: profile.id,
+          email: email,
+        },
+      });
+    } catch (error) {
+      console.error('Error during Facebook authentication:', error);
+      done(error);
+    }
+  }
+));
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -158,6 +185,13 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'em
 app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login', successRedirect: '/auth/main' }),
+);
+
+
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
+app.get(
+  '/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login', successRedirect: '/auth/main' }),
 );
 
 // Використання маршрутизаторів
