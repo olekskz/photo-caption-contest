@@ -1,3 +1,6 @@
+const validator = require('validator');
+const messageBox = document.getElementById('message');
+
 document.getElementById('register-form').addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -5,6 +8,15 @@ document.getElementById('register-form').addEventListener('submit', async (event
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
+
+    if (!validator.isAlphanumeric(username)) {
+        messageBox.textContent = 'Username must be alphanumeric';
+        return;
+    }
+    if (!validator.isLength(password, { min: 6 })) {
+        messageBox.textContent = 'Password must be at least 6 characters long';
+        return;
+    }
 
     if (password !== confirmPassword) {
         document.getElementById('message').textContent = 'Passwords do not match';
@@ -29,7 +41,7 @@ document.getElementById('register-form').addEventListener('submit', async (event
         }
     } catch (err) {
         console.error('Error registering:', err);
-        document.getElementById('message').textContent = 'Error registering';
+        messageBox.textContent = 'Error registering';
     }
 });
 

@@ -1,3 +1,4 @@
+const validator = require('validator');
 const loginForm = document.querySelector('.login-form');
 const messageBox = document.getElementById('message');
 
@@ -6,6 +7,15 @@ loginForm.addEventListener('submit', async (event) => {
 
     const password = document.querySelector('.password-input').value;
     const username = document.querySelector('.username-input').value;
+
+    if (!validator.isAlphanumeric(username)) {
+        messageBox.textContent = 'Username must be alphanumeric';
+        return;
+    }
+    if (!validator.isLength(password, { min: 6 })) {
+        messageBox.textContent = 'Password must be at least 6 characters long';
+        return;
+    }
 
     const data = {
         username: username,
@@ -22,15 +32,13 @@ loginForm.addEventListener('submit', async (event) => {
         });
 
         if (response.ok) {
-            const result = await response.json();
             window.location.href = result.redirectUrl;
         } else {
-            const errorData = await response.json();
-            messageBox.textContent = errorData.message;  
+            document.getElementById('message').textContent = result.message;
         }
     } catch (err) {
-        console.error(err);
-        messageBox.textContent = 'Network or server issue';
+        console.error('Error loginning:', err);
+        messageBox.textContent = 'Error registering';
     }
 });
 
