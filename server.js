@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const session = require('express-session');
 const { User } = require('./models');
 const photoRoutes = require('./routers/photo-route');
@@ -102,6 +103,37 @@ passport.use(
   )
 );
 
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: 'http://localhost:3001/auth/google/callback',
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        console.log('Google profile:', profile); // Додано лог для профілю Google
+
+        const email = profile.emails && profile.emails.length > 0 ? profile.emails[0].value : null;
+
+        const [user] = await User.findOrCreate({
+          where: { googleId: profile.id },
+          defaults: {
+            username: profile.displayName,
+            googleId: profile.id,
+            email: email,
+          },
+        });
+
+        done(null, user);
+      } catch (error) {
+        console.error('Error during Google authentication:', error); // Додано лог для помилок
+        done(error);
+      }
+    }
+  )
+);
+
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -120,6 +152,12 @@ app.get('/auth/github', passport.authenticate('github'));
 app.get(
   '/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login', successRedirect: '/auth/main' }),
+);
+
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login', successRedirect: '/auth/main' }),
 );
 
 // Використання маршрутизаторів

@@ -43,15 +43,18 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 unique: true,
               },
-        },
-        {
-            sequelize,
-            modelName: 'User',
-            tableName: 'users',
-            timestamps: true,
-            hooks: {
+              googleId: {
+                type: DataTypes.STRING,
+                unique: true,
+              },
+            }, {
+              sequelize,
+              modelName: 'User',
+              tableName: 'users',
+              timestamps: true,
+              hooks: {
                 beforeValidate: (user, options) => {
-                  if (user.githubId) {
+                  if (user.githubId || user.googleId) {
                     user.password = user.password || null;
                   } else {
                     if (!user.password) {

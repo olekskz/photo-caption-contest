@@ -37,3 +37,11 @@ loginForm.addEventListener('submit', async (event) => {
 document.getElementById('github-button').addEventListener('click', () => {
     window.location.href = '/auth/github';
 });
+
+document.getElementById('google-button').addEventListener('click', () => {
+    window.location.href = '/auth/google';
+});
+
+document.getElementById('facebook-button').addEventListener('click', () => {
+    window.location.href = '/auth/facebook';
+});
