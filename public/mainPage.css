@@ -14,11 +14,10 @@ body {
     margin: 0;
     background-color: #FFDDD2;
     display: flex;
-    justify-content: center;  /* Центруємо контент по горизонталі */
-    align-items: flex-start;
+    flex-direction: column; /* Встановлюємо напрямок flex-контейнера на колонку */
+    align-items: center;
     min-height: 100vh;
     overflow-x: hidden; /* Щоб не було горизонтальної прокрутки */
-    padding-top: 80px; /* Відступ для меню */
 }
 
 .menu {
@@ -84,15 +83,13 @@ body {
 }
 
 .content-container {
-    width: 60%; /* Збільшена ширина контейнера */
+    padding-top: 80px; /* Відступ для меню */
+    width: 700px;
+    margin: 0 auto; /* Центрування контейнера */
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
-    padding: 20px;
-    max-height: calc(100vh - 120px); /* Висота контейнера з урахуванням висоти меню */
-    overflow-y: auto; /* Додаємо вертикальний повзунок */
-    margin: 0 auto; /* Центруємо контейнер по горизонталі */
-    padding-top: 20px; /* Відступ зверху, щоб не перекривалось з меню */
 }
 
 .upper-part {
@@ -137,11 +134,21 @@ body {
 }
 
 .caption-box {
-    padding: 10px;
-    background-color: #f4f4f4;
+    max-height: 50px; /* Встановіть бажану висоту для відображення одного підпису */
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: darkgray;
     border-radius: 5px;
-    color: #333;
-    font-size: 16px;
+  }
+  
+.caption-box.expanded {
+    max-height: 500px; /* Встановіть бажану висоту для відображення всіх підписів */
+}
+
+.caption-box p {
+    margin: 0;
+    padding: 10px;
+    font-size: large;
 }
 
 .upper-part input {
@@ -158,6 +165,7 @@ body {
 }
 
 .profile {
+    padding-top: 100px;
     width: 500px;
     display: flex;
     flex-direction: column; /* Всі рядки розташовуються вертикально */
@@ -201,3 +209,77 @@ body {
     background-color: #fd9d7d;
 }
 
+@media (max-width: 1200px) {
+    .content-container {
+        width: 700px;
+    }
+}
+
+@media (max-width: 992px) {
+    .content-container {
+        width: 700px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-container {
+        width: 700px;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-container {
+        width: 700px;
+        padding: 0 10px;
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: #E29578;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #d2846c;
+}
+
+.posts-container {
+    padding-top: 80px; /* Відступ для меню */
+    width: 700px;
+    margin: 0 auto; /* Центрування контейнера */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Додайте цей CSS код для встановлення розмірів зображень */
+.posts-container img {
+    width: 400px; /* Встановіть бажану ширину */
+    height: 300px; /* Встановіть бажану висоту */
+    object-fit: cover; /* Зберігає пропорції зображення і обрізає його, щоб воно відповідало контейнеру */
+  }

@@ -7,37 +7,38 @@
     <title>Register</title>
 </head>
 <body>
-    <form class="register-form">
+    <form class="register-form" id="register-form">
         <label class="login-label">Register</label>
         <br>
         <div class="input-fields">
-            <input type="text" class="username-input" placeholder="Username" required>
+            <input type="text" class="username-input" id="username" placeholder="Username" required>
             <br>
-            <input type="email" class="email-input" placeholder="Email" required>
+            <input type="email" class="email-input" id="email" placeholder="Email" required>
             <br>
-            <input type="password" class="password-input" placeholder="Password" required>
+            <input type="password" class="password-input" id="password" placeholder="Password" required>
             <br>
-            <input type="password" class="confirm-password-input" placeholder="Confirm Password" required>
+            <input type="password" class="confirm-password-input" id="confirm-password" placeholder="Confirm Password" required>
         </div>
         <hr>
         <label class="continue-with">Continue with:</label>
         <div class="continue-with-container">
-            <button class="google-button">
+            <button type="button" class="google-button" id="google-button">
                 <img src="/imgs/google-brands-solid.svg" alt="icon">
             </button>
-            <button class="facebook-button">
+            <button type="button" class="facebook-button" id="facebook-button">
                 <img src="/imgs/facebook-brands-solid.svg" alt="icon">
             </button>
-            <button class="github-button">
+            <button type="button" class="github-button" id="github-button">
                 <img src="/imgs/github-brands-solid.svg" alt="icon">
             </button>
         </div>
         <button class="register-button" type="submit">Register</button>
         <p class="login-link">
-            Already have a account? <a href="/login">Login!</a>
+            Already have an account? <a href="/login">Login!</a>
         </p>
         <div id="message"></div>
     </form>
 </body>
-<script src="/register.js"></script>
+<script src="/js/register.js"></script>
+</html>
 </html>

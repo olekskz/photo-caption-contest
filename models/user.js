@@ -1,6 +1,6 @@
 'use strict';
 
-const {Model, Sequelize, DataTypes} = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             User.hasMany(models.Caption, {
                 foreignKey: 'user_id',
                 as: 'captions'
-            })
+            });
         }
     }
     User.init(
@@ -29,21 +29,46 @@ module.exports = (sequelize, DataTypes) => {
             },
             email: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                allowNull: true,
                 unique: true,
+                validate: {
+                    isEmail: true,
+                  },
             },
             password: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
             },
-        },
-        {
-            sequelize,
-            modelName: 'User',
-            tableName: 'users',
-            timestamps: true,
+            githubId: {
+                type: DataTypes.STRING,
+                unique: true,
+              },
+              googleId: {
+                type: DataTypes.STRING,
+                unique: true,
+              },
+
+              facebookId: {
+                type: DataTypes.STRING,
+                unique: true,
+              }
+            }, {
+              sequelize,
+              modelName: 'User',
+              tableName: 'users',
+              timestamps: true,
+              hooks: {
+                beforeValidate: (user, options) => {
+                  if (user.githubId || user.googleId || user.facebookId) {
+                    user.password = user.password || null;
+                  } else {
+                    if (!user.password) {
+                      throw new Error('Password is required');
+                    }
+                  }
+                },
+              },
         }
-        
     );
     return User;
 };
