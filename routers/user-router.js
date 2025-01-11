@@ -1,5 +1,4 @@
 const express = require('express');
-
 const {User, Photo} = require('../models');
 const router = express.Router();
 const passport = require('passport')
@@ -21,6 +20,7 @@ const upload = multer({ storage: storage });
 
 router.post('/register', async (req, res) => {
   const { username, email, password, confirmPassword } = req.body;
+
 
   try {
       // Перевірка на відповідність паролів
@@ -108,46 +108,6 @@ router.get('/addPost', (req, res) => {
     return res.redirect('/login');
   }
   res.render('addPost');
-  
-router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-
-  try {
-    // Шукаємо користувача в базі даних за ім'ям користувача
-    const user = await User.findOne({ where: { username } });
-
-    if (!user) {
-      return res.status(400).json({ message: 'There is no user with this username' });
-    }
-
-    // Порівнюємо введений пароль з захешованим паролем в базі даних
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-
-    if (!isPasswordValid) {
-      // Якщо пароль невірний, повертаємо помилку
-      return res.status(400).json({ message: 'Login or password do not match' });
-    }
-
-    // Якщо пароль правильний, відправляємо редирект
-     res.redirect('/auth/main'); // або res.json({ redirectUrl: '/auth/main' }) - для клієнтського коду
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
-
-
-  
-
-
-router.post('/logout', (req, res) => {
-    req.logout((err) => {
-      if (err) {
-        return res.status(500).json({ message: 'Помилка при виході' });
-      }
-      res.redirect('/login');  // Перенаправлення після виходу
-    });
 });
 
 
