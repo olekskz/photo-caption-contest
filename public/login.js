@@ -1,13 +1,9 @@
+
 const loginForm = document.querySelector('.login-form');
 const messageBox = document.getElementById('message');
 
-
-
-
-
 loginForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-
 
     const password = document.querySelector('.password-input').value;
     const username = document.querySelector('.username-input').value;
@@ -17,9 +13,8 @@ loginForm.addEventListener('submit', async (event) => {
         password: password,
     };
 
-
     try {
-        const response = await fetch('/auth/login', {
+        const response = await fetch('http://localhost:3001/auth/login', { // Updated the route to match the router
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,19 +22,27 @@ loginForm.addEventListener('submit', async (event) => {
             body: JSON.stringify(data),
         });
 
+        const result = await response.json();
+        
         if (response.ok) {
-            
-            window.location.href = '/auth/main'; 
-        } else if (response.status === 302) {
-            
-            const redirectUrl = response.headers.get('Location');
-            window.location.href = redirectUrl;
+            window.location.href = result.redirectUrl;
         } else {
-            const errorData = await response.json();
-            messageBox.textContent = errorData.message;  
+            document.getElementById('message').textContent = result.message;
         }
     } catch (err) {
-        console.error(err);
-        messageBox.textContent = 'Network or server issue';
+        console.error('Error loginning:', err);
+        messageBox.textContent = 'Error loginning';
     }
+});
+
+document.getElementById('github-button').addEventListener('click', () => {
+    window.location.href = '/auth/github';
+});
+
+document.getElementById('google-button').addEventListener('click', () => {
+    window.location.href = '/auth/google';
+});
+
+document.getElementById('facebook-button').addEventListener('click', () => {
+    window.location.href = '/auth/facebook';
 });
