@@ -68,7 +68,6 @@ router.post('/addPost', upload.single('image'), async (req, res) => {
 
 
   
-=======
 const {Photo} = require('../models')
 const router = express.Router();
 
