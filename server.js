@@ -1,4 +1,3 @@
-
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
@@ -28,7 +27,6 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.use(
   helmet.contentSecurityPolicy({
@@ -208,12 +206,6 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login');
 });
-
-
-app.get('/register',  (req, res) => {
-    res.render('register')
-})
-
 
 app.get('/register', (req, res) => {
   res.render('register');
