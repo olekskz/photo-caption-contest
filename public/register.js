@@ -1,46 +1,50 @@
-const registerForm = document.querySelector('.register-form');
-const loginForm = document.querySelector('.login-form');
+
 const messageBox = document.getElementById('message');
 
-
-
-// Обробник для реєстрації
-registerForm.addEventListener('submit', async (event) => {
+document.getElementById('register-form').addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const email = document.querySelector('.email-input').value;
-    const username = document.querySelector('.username-input').value;  // username, а не name
-    const password = document.querySelector('.password-input').value;
-    const confirmPassword = document.querySelector('.confirm-password-input').value;
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
 
-    const data = {
-        username: username,  // передаємо username
-        email: email,
-        password: password,
-        confirmPassword: confirmPassword,
-    };
+
+    if (password !== confirmPassword) {
+        document.getElementById('message').textContent = 'Passwords do not match';
+        return;
+    }
 
     try {
-        const response = await fetch('/auth/register', {
+        const response = await fetch('http://localhost:3001/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({ username, email, password }),
         });
 
+        const result = await response.json();
+
         if (response.ok) {
-            const result = await response.json();
             window.location.href = result.redirectUrl;
         } else {
-            const errorData = await response.json();
-            messageBox.textContent = errorData.message;  // Відображення повідомлення про помилку
+            document.getElementById('message').textContent = result.message;
         }
-    } catch (error) {
-        console.error(error);
-        messageBox.textContent = 'Мережевий збій або помилка на сервері';
+    } catch (err) {
+        console.error('Error registering:', err);
+        messageBox.textContent = 'Error registering';
     }
 });
 
+document.getElementById('github-button').addEventListener('click', () => {
+    window.location.href = '/auth/github';
+});
 
+document.getElementById('google-button').addEventListener('click', () => {
+    window.location.href = '/auth/google';
+});
 
+document.getElementById('facebook-button').addEventListener('click', () => {
+    window.location.href = '/auth/facebook';
+});
