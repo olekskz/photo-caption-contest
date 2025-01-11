@@ -61,12 +61,6 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', (req, res, next) => {
 
-  if (!validator.isAlphanumeric(username)) {
-    return res.status(400).json({ message: 'Username must be alphanumeric' });
-  }
-  if (!validator.isLength(password, { min: 6 })) {
-    return res.status(400).json({ message: 'Password must be at least 6 characters long' });
-  }
   
   passport.authenticate('local', (err, user, info) => {
     if (err) {
