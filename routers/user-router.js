@@ -18,12 +18,6 @@ const storage = new CloudinaryStorage({
 
 
 const upload = multer({ storage: storage });
-const {User} = require('../models');
-const router = express.Router();
-const passport = require('passport')
-const bcrypt = require('bcrypt');
-const { where } = require('sequelize');
-
 
 router.post('/register', async (req, res) => {
   const { username, email, password, confirmPassword } = req.body;
