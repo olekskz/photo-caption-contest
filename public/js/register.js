@@ -9,14 +9,6 @@ document.getElementById('register-form').addEventListener('submit', async (event
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
 
-    if (!validator.isAlphanumeric(username)) {
-        messageBox.textContent = 'Username must be alphanumeric';
-        return;
-    }
-    if (!validator.isLength(password, { min: 6 })) {
-        messageBox.textContent = 'Password must be at least 6 characters long';
-        return;
-    }
 
     if (password !== confirmPassword) {
         document.getElementById('message').textContent = 'Passwords do not match';

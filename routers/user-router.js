@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt');
 const multer = require('multer');
 const cloudinary = require('../config/cloudinary');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const validator = require('validator');
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
@@ -22,16 +21,6 @@ const upload = multer({ storage: storage });
 router.post('/register', async (req, res) => {
   const { username, email, password, confirmPassword } = req.body;
 
-  // Валідація даних
-  if (!validator.isAlphanumeric(username)) {
-    return res.status(400).json({ message: 'Username must be alphanumeric' });
-  }
-  if (!validator.isEmail(email)) {
-    return res.status(400).json({ message: 'Must be a valid email address' });
-  }
-  if (!validator.isLength(password, { min: 6 })) {
-    return res.status(400).json({ message: 'Password must be at least 6 characters long' });
-  }
 
   try {
       // Перевірка на відповідність паролів

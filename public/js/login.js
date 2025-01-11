@@ -8,15 +8,6 @@ loginForm.addEventListener('submit', async (event) => {
     const password = document.querySelector('.password-input').value;
     const username = document.querySelector('.username-input').value;
 
-    if (!validator.isAlphanumeric(username)) {
-        messageBox.textContent = 'Username must be alphanumeric';
-        return;
-    }
-    if (!validator.isLength(password, { min: 6 })) {
-        messageBox.textContent = 'Password must be at least 6 characters long';
-        return;
-    }
-
     const data = {
         username: username,
         password: password,
