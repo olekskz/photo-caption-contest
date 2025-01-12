@@ -14,7 +14,7 @@ loginForm.addEventListener('submit', async (event) => {
     };
 
     try {
-        const response = await fetch('http://localhost:3001/auth/login', { // Updated the route to match the router
+        const response = await fetch('/auth/login', { // Updated the route to match the router
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ loginForm.addEventListener('submit', async (event) => {
         });
 
         const result = await response.json();
-        
+
         if (response.ok) {
             window.location.href = result.redirectUrl;
         } else {
