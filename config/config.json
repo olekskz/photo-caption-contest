@@ -14,7 +14,7 @@
     "dialect": "postgres"
   },
   "production": {
-    "use_env_variable": "postgresql://photo_contest_user:DpLbcYdpI2lPpm24e2UtAJFJWLvFvpL2@dpg-ctm7d1q3esus739njkug-a.frankfurt-postgres.render.com/photo_contest",
+    "use_env_variable": "DATABASE_URL",
     "dialect": "postgres"
   }
 }
