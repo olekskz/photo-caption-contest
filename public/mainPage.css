@@ -282,4 +282,35 @@ button[type="submit"]:hover {
     width: 400px; /* Встановіть бажану ширину */
     height: 300px; /* Встановіть бажану висоту */
     object-fit: cover; /* Зберігає пропорції зображення і обрізає його, щоб воно відповідало контейнеру */
-  }
+}
+
+.like-button {
+    margin-left: 30px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.like-button:hover {
+    background-color: #0056b3;
+}
+
+.like-count {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.caption-box {
+    margin-top: 10px;
+}
+
+.add-caption-button {
+    margin-top: 10px;
+}
+
+.expanded {
+    max-height: none;
+}

@@ -12,6 +12,7 @@ const { User } = require('./models');
 const photoRoutes = require('./routers/photo-route');
 const userRoutes = require('./routers/user-router');
 const captionRoutes = require('./routers/caption-route');
+const likeRoutes = require('./controllers/likeController');
 const bcrypt = require('bcrypt');
 const { where } = require('sequelize');
 const { defaults } = require('pg');
@@ -198,6 +199,7 @@ app.get(
 app.use('/auth', userRoutes);
 app.use('/auth', photoRoutes);
 app.use('/auth', captionRoutes);
+app.use('/auth', likeRoutes);
 
 app.get('/', (req, res) => {
   res.render('register');
