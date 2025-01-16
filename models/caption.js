@@ -33,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
+            likes: {
+                type: DataTypes.INTEGER,
+                defaultValue: 0,
+                allowNull: false,
+              },
         },
         {
             sequelize,

@@ -88,6 +88,41 @@ const loadPosts = async () => {
           captions.forEach(caption => {
             const captionElement = document.createElement('p');
             captionElement.textContent = ` by: ${caption.user.username}         ${caption.text}`;
+
+            const likeButton = document.createElement('button');
+            likeButton.textContent = 'Like';
+            likeButton.classList.add('like-button');
+            likeButton.addEventListener('click', async (event) => {
+              event.stopPropagation();
+              const isLiked = likeButton.classList.toggle('liked');
+              const method = isLiked ? 'POST' : 'DELETE';
+              if (isLiked) {
+                likeButton.textContent = 'Unlike';
+                likeButton.style.backgroundColor = 'red';
+              } else {
+                likeButton.textContent = 'Like';
+                likeButton.style.backgroundColor = '#007bff';
+              }
+              fetch(`/auth/captions/${caption.id}/like`, { method })
+                .then(() => {
+                  fetch(`/auth/captions/${caption.id}/likes`)
+                    .then(response => response.json())
+                    .then(data => {
+                      likeCount.textContent = `Likes: ${data.likes}`;
+                    });
+                })
+                .catch(err => console.error('Error liking/unliking caption:', err));
+            });
+
+            const likeCount = document.createElement('span');
+            likeCount.classList.add('like-count');
+            fetch(`/auth/captions/${caption.id}/likes`)
+              .then(response => response.json())
+              .then(data => {
+                likeCount.textContent = `Likes: ${data.likes}`;
+              });
+
+            captionElement.append(likeButton, likeCount);
             captionBox.appendChild(captionElement);
           });
         })
@@ -116,6 +151,43 @@ const loadPosts = async () => {
             const result = await response.json();
             const captionElement = document.createElement('p');
             captionElement.textContent = `${result.caption} by: ${result.user.username}`;
+            
+            const likeButton = document.createElement('button');
+            likeButton.textContent = "Like";
+            likeButton.classList.add('like-button');
+            likeButton.addEventListener('click', async (event) => {
+              event.stopPropagation();
+              const isLiked = likeButton.classList.toggle('liked');
+              const method = isLiked ? 'POST' : 'DELETE';
+              if (isLiked) {
+                likeButton.textContent = 'Unlike';
+                likeButton.style.backgroundColor = 'red';
+              } else {
+                likeButton.textContent = 'Like';
+                likeButton.style.backgroundColor = '#007bff';
+              }
+              fetch(`/auth/captions/${result.id}/like`, { method })
+                .then(() => {
+                  fetch(`/auth/captions/${result.id}/likes`)
+                    .then(response => response.json())
+                    .then(data => {
+                      likeCount.textContent = `Likes: ${data.likes}`;
+                    });
+                })
+                .catch(err => {
+                  console.error('Error liking/unliking caption:', err);
+                });
+            });
+
+            const likeCount = document.createElement('span');
+            likeCount.classList.add('like-count');
+            fetch(`/auth/captions/${result.id}/likes`)
+              .then(response => response.json())
+              .then(data => {
+                likeCount.textContent = `Likes: ${data.likes}`;
+              });
+
+            captionElement.append(likeButton, likeCount);
             captionBox.appendChild(captionElement);
             captionInput.value = '';
           } else {
@@ -142,7 +214,7 @@ const handleScroll = () => {
   }
 };
 
-document.addEventListener('scroll', handleScroll);
+window.addEventListener('scroll', handleScroll);
 
 // Initial load
 loadPosts();

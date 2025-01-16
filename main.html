@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="/public/mainPage.css">
+</head>
+<body>
+    <header class="menu">
+        <nav>
+            <ul class="menu-items">
+                <li class="menu-left">
+                    <a href="/auth/main">Photo Contest</a>
+                </li>
+                <div class="menu-right">
+                    <a href="/auth/profile" class="profile-button">
+                        <img src="/imgs/user-regular.svg" alt="icon" width="20" height="20">
+                    </a>
+                    <a href="/auth/addPost" class="add-post-button">
+                        <img src="/imgs/square-plus-regular.svg" alt="icon" width="20" height="25">
+                    </a>
+                    <a href="/logout" class="logout-button">
+                        <img src="/imgs/right-from-bracket-solid.svg" alt="icon" width="20" height="25">
+                    </a>
+                </div>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="posts-container">
+        <div class="upper-part">
+            <label class="photo-name">Sample Post Title</label>
+            <img src="/public/imgs/Tips_for_Taking_Photos_at_the_Beach_55dd7d25-11df-4acf-844f-a5b4ebeff4df.webp" alt="Sample Post Title">
+            <div class="user-data">
+                <label>By:</label>
+                <p>SampleUser</p>
+            </div>
+            <hr>
+            <div class="lower-part">
+                <div class="caption-box" aria-placeholder="No captions yet">
+                    <p> by: AnotherUser         Sample caption text
+                        <button class="like-button">Like</button>
+                        <span class="like-count">Likes: 0</span>
+                    </p>
+                </div>
+                <input placeholder="Add caption">
+                <button class="add-caption-button">Add</button>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Підключення скрипта mainPage.js -->
+    <script src="/js/mainPage.js"></script>
+</body>
+</html>
