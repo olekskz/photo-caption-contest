@@ -111,7 +111,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3001/auth/google/callback',
+      callbackURL: 'https://photo-caption-contest-mnpm.onrender.com/google/callback',
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -140,7 +140,7 @@ passport.use(
   new FacebookStrategy({
     clientID: process.env.FACEBOOK_CLIENT_ID,
     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL: 'http://localhost:3001/auth/facebook/callback',
+    callbackURL: 'https://photo-caption-contest-mnpm.onrender.com/auth/facebook/callback',
   },
   async (accessToken, refreshToken, profile, done) => {
     try {
